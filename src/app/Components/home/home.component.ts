@@ -102,22 +102,25 @@ export class HomeComponent implements OnInit {
 			}
 			return this.baseUrl + this.URL_LABEL[suffix] + "/" + tempLabel;
 		}
+		this.refrenceTable = [];
 		this.http.get(getUrl()).subscribe(res => {
 			console.log(res);
-			this.refrenceTable = [];
 			// Append type column
 			Object.keys(res).forEach(prop => {
 				let table = res[prop];
 				table.forEach(obj => obj["Type"] = prop[0].toUpperCase() + prop.slice(1));
-				// this.refrenceTable = this.refrenceTable.length ? [this.refrenceTable, ...table] : table;
 				this.refrenceTable.push(...table);
 			})
+		}, err => {
+			console.log(err);
+			this.dataSource = new MatTableDataSource([]);
+			this.isTableView = true;
+		}, () => {
 			this.psuedoData = this.refrenceTable;
-			// this.psuedoData.forEach(data => delete data[suffix]);
 			this.displayedColumns = Object.keys(this.psuedoData[0]);
 			this.dataSource = new MatTableDataSource(this.psuedoData);
 			this.isTableView = true;
-		})
+		});
 	}
 
 	applyFilter(filter: string) {
