@@ -11,6 +11,7 @@ import { HelpComponent } from './Components/help/help.component';
 import { DownloadsComponent } from './Components/downloads/downloads.component';
 import { AboutUsComponent } from './Components/about-us/about-us.component';
 import { FeedbackComponent } from './Components/feedback/feedback.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FeedbackComponent } from './Components/feedback/feedback.component';
     AppRoutingModule,
     CommonModule,
     FormsModule,
-    MaterialModule
+    MaterialModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
